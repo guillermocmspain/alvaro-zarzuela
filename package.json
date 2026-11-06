@@ -1,0 +1,17 @@
+{
+  "name": "alvaro-zarzuela",
+  "version": "1.0.0",
+  "description": "Portfolio editorial estático de Álvaro Zarzuela",
+  "scripts": {
+    "dev": "node scripts/serve.cjs",
+    "check": "node --check dist/app.js",
+    "prepare:assets": "node scripts/prepare-assets.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  },
+  "private": true
+}
