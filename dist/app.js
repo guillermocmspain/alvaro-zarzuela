@@ -77,9 +77,32 @@
       if(rect.bottom<0 || rect.top>innerHeight)return;
       const p=clamp(-rect.top/Math.max(1,rect.height-innerHeight));
       if(scene.dataset.scene==='hero') {
-        const shrink=ease(ramp(p,.08,.78));
-        const split=ease(ramp(p,.05,.65));
-        style(scene,{'--hero-scale':1-shrink*.64,'--name-left':`${-split*75}vw`,'--name-right':`${split*75}vw`,'--walker-scale':1+shrink*.08,'--hero-detail':1-ramp(p,0,.25),'--bridge-opacity':ease(ramp(p,.3,.65))});
+        // One continuous scroll-controlled frame: contract, wipe, settle.
+        const contract=ease(ramp(p,.06,.58));
+        const wipe=ease(ramp(p,.38,.78));
+        const mobile=innerWidth<=600;
+        const edge=110-wipe*120;
+        const wave=Array.from({length:121},(_,i)=>{
+          const x=i*100/120;
+          const y=edge+Math.sin(i*.28)*1.2+Math.sin(i*.11)*2.5+Math.sin(i*.75)*.5;
+          return `${x}% ${y.toFixed(2)}%`;
+        }).join(',');
+        style(scene,{
+          '--frame-x':`${contract*(mobile?9:29)}%`,
+          '--frame-y':`${contract*(mobile?30:20)}%`,
+          '--hero-detail':1-ease(ramp(p,0,.18)),
+          '--title-rise':`${-ease(ramp(p,0,.35))*32}vh`,
+          '--title-opacity':1-ease(ramp(p,.08,.32)),
+          '--portrait-drift':`${-contract*(mobile?0:18)}vw`,
+          '--portrait-rise':`${-ease(ramp(p,.32,.8))*28}vh`,
+          '--outgoing-opacity':1-ease(ramp(p,.68,.8)),
+          '--bridge-opacity':ease(ramp(p,.1,.4)),
+          '--bridge-drift':`${(1-contract)*30}vw`,
+          '--arrival-clip':`polygon(${wave},100% 100%,0% 100%)`,
+          '--arrival-rise':`${(1-ease(ramp(p,.4,.85)))*18}%`,
+          '--frame-opacity':ease(ramp(p,.06,.18)),
+          '--arrival-caption':ease(ramp(p,.8,.94))
+        });
       } else if(scene.dataset.scene==='timeline') {
         const segment=Math.min(2,Math.floor(p*3));
         const position=segment===2?2:segment+ease(ramp(p*3-segment,.72,1));
@@ -192,7 +215,7 @@
   const preload=new Image();
   preload.src='assets/walk-entry.webp';
   const portrait=document.querySelector('.hero-portrait img');
-  const assets=[preload.decode(),portrait.decode(),document.fonts.load('800 24px Display'),document.fonts.load('400 16px Body')];
+  const assets=[preload.decode(),portrait.decode(),document.querySelector('.hero-arrival img').decode(),document.fonts.load('800 24px Display'),document.fonts.load('400 16px Body')];
   let settled=0;
   const ready=()=>{
     enter.disabled=false;

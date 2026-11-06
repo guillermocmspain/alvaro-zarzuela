@@ -1,0 +1,37 @@
+/* Reference choreography: full canvas -> central frame -> rising portrait.
+   Native scrolling remains reversible. No timers, wheel interception or video. */
+.hero-scroll{height:310svh}
+.hero-panel{transform:none;clip-path:inset(var(--frame-y,0%) var(--frame-x,0%));opacity:var(--outgoing-opacity,1);will-change:clip-path}
+.hero-panel:after{display:none}
+.hero-title{translate:0 var(--title-rise,0);opacity:var(--title-opacity,1)}
+.hero-title span,.hero-title span+span{transform:none}
+.hero-portrait{translate:var(--portrait-drift,0) var(--portrait-rise,0);will-change:translate}
+.hero-bridge{display:block;font-size:12vw;color:var(--red);opacity:var(--bridge-opacity,0);overflow:hidden}
+.hero-bridge span{position:absolute;top:46%;white-space:nowrap}
+.hero-bridge span:first-child{right:72%;transform:translate(calc(-1 * var(--bridge-drift,30vw)),-50%)}
+.hero-bridge span:last-child{left:72%;transform:translate(var(--bridge-drift,30vw),-50%)}
+.hero-arrival{position:absolute;inset:var(--frame-y,0%) var(--frame-x,0%);z-index:3;overflow:hidden;pointer-events:none}
+.arrival-reveal{position:absolute;inset:0;background:var(--cream);clip-path:var(--arrival-clip,polygon(0 110%,100% 110%,100% 100%,0 100%));will-change:clip-path}
+.arrival-reveal img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;translate:0 var(--arrival-rise,18%);will-change:translate}
+.hero-frame{position:absolute;inset:var(--frame-y,0%) var(--frame-x,0%);border:1px solid #b63e3180;outline:3px solid var(--cream);outline-offset:3px;z-index:4;opacity:var(--frame-opacity,0);pointer-events:none}
+.arrival-caption{position:absolute;top:84%;left:15%;width:70%;text-align:center;z-index:4;font:800 clamp(22px,2.5vw,38px)/1 var(--display);opacity:var(--arrival-caption,0);translate:0 calc((1 - var(--arrival-caption,0))*18px);color:#101010}
+.arrival-caption span{display:block;margin-top:12px;font:400 9px/1.5 var(--body);letter-spacing:1.5px}
+@media(max-width:600px){
+  .hero-scroll{height:280svh}
+  .hero-bridge{font-size:21vw}
+  .hero-bridge span:first-child{top:23%;right:0;width:100%;text-align:center}
+  .hero-bridge span:last-child{top:78%;left:0;width:100%;font-size:.76em;text-align:center}
+  .arrival-caption{top:86%;left:5%;width:90%;font-size:23px}
+  .arrival-caption span{font-size:7px;letter-spacing:.8px}
+}
+/* Show both photographs in reading order when animation is disabled. */
+.motion-reduced .hero-scroll,html:not(.js) .hero-scroll{height:auto}
+.motion-reduced .hero,html:not(.js) .hero{height:auto;position:relative;overflow:visible}
+.motion-reduced .hero-panel,html:not(.js) .hero-panel{position:relative;height:100svh;clip-path:none;opacity:1}
+.motion-reduced .hero-title,html:not(.js) .hero-title{translate:none;opacity:1}
+.motion-reduced .hero-portrait,html:not(.js) .hero-portrait{translate:none}
+.motion-reduced .hero-arrival,html:not(.js) .hero-arrival{position:relative;inset:auto;margin:60px auto 0;width:min(80%,750px);aspect-ratio:1200/945}
+.motion-reduced .arrival-reveal,html:not(.js) .arrival-reveal{clip-path:none}
+.motion-reduced .arrival-reveal img,html:not(.js) .arrival-reveal img{translate:none}
+.motion-reduced .hero-frame,html:not(.js) .hero-frame{display:none}
+.motion-reduced .arrival-caption,html:not(.js) .arrival-caption{position:relative;top:auto;left:auto;width:auto;padding:25px 6vw 60px;opacity:1;translate:none}
