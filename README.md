@@ -43,6 +43,8 @@ Las fotos de las tarjetas son portadas editoriales; no se presentan como fotogra
 
 ## Publicación
 
-Repositorio GitHub privado para iterar. Sites sirve una vista privada del prototipo; la configuración está en `.openai/hosting.json`. El proyecto puede migrarse a Astro si crece a varias páginas; no es necesario para esta primera página estática.
+Web pública: https://guillermocmspain.github.io/alvaro-zarzuela/
+
+Repositorio GitHub público. Cada push a `main` valida y publica `dist/` mediante `.github/workflows/pages.yml`. La web no necesita inicio de sesión. La configuración de la vista privada anterior en Sites se conserva en `.openai/hosting.json`. El proyecto puede migrarse a Astro si crece a varias páginas; no es necesario para esta primera página estática.
 
 Las fotografías y marcas pertenecen a sus respectivos titulares. Las licencias OFL de las fuentes están incluidas en `dist/assets/`.
