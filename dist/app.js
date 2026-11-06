@@ -59,9 +59,6 @@
   },{threshold:0.08,rootMargin:'0px 0px -15px 0px'});
   document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
 
-  const chapterLinks = [...document.querySelectorAll('.chapter-nav a')];
-  const chapters = chapterLinks.map(link => document.querySelector(link.hash));
-  const progress = document.querySelector('.progress');
   const parallax = [...document.querySelectorAll('[data-parallax]')];
   const scenes = [...document.querySelectorAll('[data-scene]')];
   const milestones = [...document.querySelectorAll('.milestone')];
@@ -132,14 +129,6 @@
   let scheduled = false;
   const updateScroll = () => {
     scheduled = false;
-    const max = document.documentElement.scrollHeight - innerHeight;
-    progress.style.setProperty('--progress',max > 0 ? scrollY / max : 0);
-    let active = 0;
-    chapters.forEach((chapter,index) => {if(chapter.getBoundingClientRect().top < innerHeight * .45) active=index;});
-    chapterLinks.forEach((link,index) => {
-      if(index===active)link.setAttribute('aria-current','location');
-      else link.removeAttribute('aria-current');
-    });
     if(motionDisabled())return;
     updateScenes();
     parallax.forEach(element => {
