@@ -11,8 +11,10 @@
   <link rel="preload" href="assets/display.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="assets/walk-entry.webp" as="image">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="motion.css?v=2">
-  <script src="app.js?v=2" defer></script>
+  <link rel="preload" href="assets/hero-trombone.webp" as="image">
+  <link rel="stylesheet" href="motion.css?v=3">
+  <link rel="stylesheet" href="hero.css?v=3">
+  <script src="app.js?v=3" defer></script>
 </head>
 <body>
   <svg class="mask-definitions" aria-hidden="true" width="0" height="0"><defs><clipPath id="walk-silhouette"><path d="M171 112 Q183 109 190 116 Q195 122 196 136 L193 148 188 156 195 162 Q209 162 219 172 L232 185 239 191 242 162 Q234 148 238 138 Q241 132 252 133 L268 135 Q283 139 288 152 Q292 165 287 177 L279 195 274 215 269 235 263 255 257 276 249 299 242 316 239 326 237 333 230 335 226 326 222 325 219 343 219 364 216 381 213 390 215 397 215 409 222 416 228 427 237 437 245 443 254 448 253 453 248 458 240 462 233 470 225 476 213 481 211 477 212 471 216 460 213 449 209 439 208 450 207 464 205 470 209 479 213 484 214 491 197 495 177 498 167 496 166 493 177 488 185 480 189 469 190 451 193 436 194 425 191 418 180 406 166 391 Q154 380 155 367 L157 346 162 320 168 297 162 304 155 314 155 322 150 330 145 333 141 330 141 320 145 311 143 307 145 296 152 284 157 273 160 263 154 262 153 257 159 250 160 241 157 235 159 223 163 210 167 196 171 183 175 172 163 164 161 153 157 145 159 135 156 127 Q157 116 171 112Z"/></clipPath></defs></svg>
@@ -42,21 +44,18 @@
       <div class="hero-panel">
       <h1 id="hero-title" class="hero-title"><span>ÁLVARO</span><span>ZARZUELA</span></h1>
       <div class="hero-composition">
-        <p class="hero-note">Hay historias<br>que no se cuentan.<br><em>Se tocan.</em><span class="hand-arrow" aria-hidden="true">↘</span></p>
-        <figure class="hero-walker"><svg viewBox="130 105 170 398" role="img" aria-label="Álvaro Zarzuela andando con su instrumento"><image href="assets/walk-entry.webp" width="397" height="573" clip-path="url(#walk-silhouette)"/></svg></figure>
-        <a class="round-link" href="#archivo" aria-label="Ver vídeos en directo"><span>EN DIRECTO<br>Y SIN FILTROS</span><b aria-hidden="true">↗</b></a>
-        <div class="hero-side"><span>UN INSTRUMENTO.</span><span>MIL FORMAS DE SENTIR.</span></div>
+        <p class="hero-note">Hay historias que no se cuentan.<br><em>Se tocan.</em></p>
+        <figure class="hero-portrait"><img src="assets/hero-trombone.webp" alt="Álvaro Zarzuela con traje, sosteniendo su trombón" width="1000" height="1300" fetchpriority="high"></figure>
+        <a class="hero-cta" href="#archivo">VER EN DIRECTO <span aria-hidden="true">↗</span></a>
       </div>
-      <a class="hero-bottom" href="#historia"><span>DESLIZA PARA DESCUBRIR</span><span class="down" aria-hidden="true">↓</span><span>UNA HISTORIA CON MUCHO AIRE</span></a>
+      <a class="hero-bottom" href="#historia"><span>DESLIZA PARA DESCUBRIR</span><span class="down" aria-hidden="true">↓</span></a>
       </div>
       <div class="hero-bridge" aria-hidden="true"><span>LA</span><span>HISTORIA</span></div>
-      <p class="hero-bridge-note">UN TROMBÓN. UNA VIDA EN MOVIMIENTO.</p>
     </section>
     </div>
     <nav class="chapter-nav" aria-label="Capítulos"><a href="#historia" aria-current="location"><span>01</span> EL ORIGEN</a><a href="#tangana"><span>02</span> C. TANGANA</a><a href="#bisbal"><span>03</span> DAVID BISBAL</a><a href="#archivo"><span>04</span> EN DIRECTO</a><div class="progress" aria-hidden="true"></div></nav>
-    <section id="historia" class="story section" aria-labelledby="story-title">
+    <section id="historia" class="story section" aria-label="El origen de Álvaro Zarzuela">
       <div class="section-meta"><span>01 / EL ORIGEN</span><span>DE CERCA, TODO SUENA DIFERENTE</span></div>
-      <div class="intro"><p class="eyebrow">ESTA ES LA HISTORIA DE</p><h2 id="story-title" class="reveal">UN POCO DE AIRE.<br>UN MUNDO DE <em>MÚSICA.</em></h2><p class="intro-copy reveal">Un trombón, una forma de sentir y el escenario como punto de encuentro. Un recorrido por el universo de Álvaro Zarzuela, a través de las imágenes y los momentos que lo hacen sonar.</p></div>
       <div class="origin-grid">
         <div class="origin-year reveal"><span class="eyebrow">EL PRIMER COMPÁS</span><strong>19<span>98</span></strong><small>Un punto de partida*</small></div>
         <figure class="origin-photo reveal"><img src="assets/portrait-trombone.webp" alt="Álvaro con traje y trombón junto al paseo marítimo" width="512" height="644" loading="lazy"><figcaption>ANTES DEL FOCO, EL INSTRUMENTO.</figcaption></figure>

@@ -191,7 +191,8 @@
   if(!location.hash || location.hash==='#inicio')openEntrance();
   const preload=new Image();
   preload.src='assets/walk-entry.webp';
-  const assets=[preload.decode(),document.fonts.load('800 24px Display'),document.fonts.load('400 16px Body')];
+  const portrait=document.querySelector('.hero-portrait img');
+  const assets=[preload.decode(),portrait.decode(),document.fonts.load('800 24px Display'),document.fonts.load('400 16px Body')];
   let settled=0;
   const ready=()=>{
     enter.disabled=false;
