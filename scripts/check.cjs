@@ -4,7 +4,7 @@ const {execFileSync}=require('node:child_process');
 execFileSync(process.execPath,['--check','dist/app.js']);
 const html=fs.readFileSync('dist/index.html','utf8');
 const ids=new Set([...html.matchAll(/id="([^"]+)"/g)].map(match=>match[1]));
-const broken=[...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(match=>match[1]).filter(url=>url.startsWith('#')?!ids.has(url.slice(1)):!/^https?:/.test(url)&&!fs.existsSync(path.join('dist',url)));
+const broken=[...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(match=>match[1]).filter(url=>url.startsWith('#')?!ids.has(url.slice(1)):!/^https?:/.test(url)&&!fs.existsSync(path.join('dist',url.split('?')[0])));
 if(broken.length)throw Error('Broken resources or anchors: '+broken.join(', '));
 const photos=fs.readdirSync('dist/assets').filter(name=>name.endsWith('.webp')&&!name.includes('-small'));
 console.log('Syntax, local resources and internal anchors OK');
