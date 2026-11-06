@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="motion.css?v=3">
   <link rel="stylesheet" href="hero.css?v=4">
   <link rel="stylesheet" href="hero-transition.css?v=7">
-  <script src="app.js?v=9" defer></script>
+  <link rel="stylesheet" href="history.css?v=10">
+  <script src="app.js?v=10" defer></script>
 </head>
 <body>
   <a class="skip" href="#historia">Saltar al contenido</a>
@@ -49,33 +50,35 @@
       <h2 class="history-transition-title" aria-label="Historia"><span aria-hidden="true">HIS</span><span aria-hidden="true">TO</span><span aria-hidden="true">RIA</span></h2>
     </section>
     </div>
-    <section id="historia" class="story section" aria-label="El origen de Álvaro Zarzuela">
-      <div class="origin-grid">
-        <div class="origin-year reveal"><span class="eyebrow">EL PRIMER COMPÁS</span><strong>19<span>98</span></strong><small>Un punto de partida*</small></div>
-        <figure class="origin-photo reveal"><img src="assets/portrait-trombone.webp" alt="Álvaro con traje y trombón junto al paseo marítimo" width="512" height="644" loading="lazy"><figcaption>ANTES DEL FOCO, EL INSTRUMENTO.</figcaption></figure>
-        <div class="origin-copy reveal"><span class="asterisk" aria-hidden="true">✳</span><h3>TODO EMPIEZA<br>POR ESCUCHAR.</h3><p>Entre el sonido del metal y el silencio antes de entrar. La música se construye ahí: en cada ensayo, en cada encuentro, en cada nota compartida.</p><p class="editorial-note">*1998: fecha de nacimiento provisional, pendiente de confirmar.</p></div>
+    <section id="historia" class="history-scroll" data-scene="history" aria-label="Historia de Álvaro Zarzuela">
+      <div class="history-stage">
+        <div class="history-training">
+          <div class="history-date" aria-hidden="true"><span class="date-column"><span>2</span></span><span class="date-column"><span>0</span></span><span class="date-column"><span class="date-reel" data-digit="2"><b>0</b><b>1</b><b>2</b></span></span><span class="date-column"><span class="date-reel" data-digit="3"><b>5</b><b>7</b><b>1</b></span></span></div>
+          <span class="history-date-label" aria-hidden="true">Los primeros compases</span>
+          <div class="history-records">
+            <article class="history-record"><div><h3><span>2005</span> CUÉLLAR</h3><p>Todo empieza por escuchar. Álvaro comienza en la escuela de música de Cuéllar: las primeras notas, los primeros ensayos y un instrumento que se queda para siempre.</p></div><figure><img src="assets/portrait-trombone.webp" width="512" height="644" alt="Álvaro con su trombón, fotografía de archivo" loading="lazy"><figcaption>EL INICIO DE UN CAMINO · FOTO DE ARCHIVO</figcaption></figure></article>
+            <article class="history-record"><div><h3><span>2017</span> MUSIKENE</h3><p>La música se convierte en el camino. Comienza su formación en Musikene, una nueva etapa para profundizar en el instrumento y seguir creciendo entre músicos.</p></div><figure><img src="assets/portrait-walk.webp" width="424" height="584" alt="Álvaro caminando con su instrumento, fotografía de archivo" loading="lazy"><figcaption>SEGUIR APRENDIENDO · FOTO DE ARCHIVO</figcaption></figure></article>
+            <article class="history-record"><div><h3><span>2021</span> HOLANDA</h3><p>Un máster en Holanda abre nuevas perspectivas. Otro lugar, nuevas experiencias y la misma vocación. Ese año comienza también su etapa con C. Tangana.</p></div><figure><img src="assets/portrait-live.webp" width="382" height="482" alt="Álvaro sobre el escenario, fotografía de archivo" loading="lazy"><figcaption>CRUZAR FRONTERAS · FOTO DE ARCHIVO</figcaption></figure></article>
+          </div>
+        </div>
+        <div class="history-blue" aria-hidden="true"></div>
+        <div class="history-seal" aria-hidden="true"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="88"/><ellipse cx="100" cy="100" rx="78" ry="91"/><path d="M25 88C22 39 80 16 122 23M173 114C168 166 112 184 70 167"/></svg><span>2021</span></div>
+        <article class="history-tangana">
+          <div class="history-split-year" aria-hidden="true"><span>20</span><span>21</span></div>
+          <h3><span class="history-accessible">2021 · </span><span>C.</span><span>TAN</span><span>GANA</span></h3>
+          <p>Con C. Tangana, el escenario se convierte en un encuentro. La fuerza de una banda, la raíz y la emoción de hacer música juntos.</p>
+        </article>
+        <div class="history-red" aria-hidden="true"></div>
+        <article class="history-bisbal">
+          <h3><span>2022</span><span>EL</span><span>ESCENARIO.</span></h3>
+          <figure class="history-float history-float-one"><img src="assets/bisbal-stage.webp" width="665" height="467" alt="David Bisbal acompañado por su sección de metales" loading="lazy"></figure>
+          <figure class="history-float history-float-two"><img src="assets/bisbal-live.webp" width="614" height="475" alt="David Bisbal durante una actuación con su banda" loading="lazy"></figure>
+          <p>En 2022 comienza su etapa con David Bisbal. Una nueva voz, nuevos escenarios y la misma pasión por la música en directo.</p>
+        </article>
+        <figure class="history-finale"><img src="assets/history-applause.webp" width="1097" height="1434" alt="Álvaro aplaudiendo con el trombón junto al cuerpo" loading="lazy"><figcaption>LA HISTORIA<br>SIGUE SONANDO.</figcaption></figure>
       </div>
-      <div class="interlude"><span>TOMAR AIRE.</span><span class="outline">SALIR A ESCENA.</span><span aria-hidden="true">↗</span></div>
     </section>
-    <section class="timeline-scroll" data-scene="timeline" aria-label="Formación musical: 2005, 2017 y 2021">
-      <div class="timeline-stage">
-        <p class="timeline-label">EL CAMINO / TRES LUGARES. UNA MISMA VOCACIÓN.</p>
-        <article class="milestone" data-milestone="0"><span class="milestone-year">2005</span><div class="milestone-copy"><span class="eyebrow">01 / CUÉLLAR</span><h3>EL PRIMER<br>COMPÁS.</h3><p>Álvaro empieza en la escuela de música de Cuéllar. El inicio de un camino que se construye nota a nota.</p></div><figure class="milestone-photo"><img src="assets/portrait-trombone.webp" alt="Retrato de Álvaro con su trombón, fotografía de archivo" width="512" height="644" loading="lazy"></figure></article>
-        <article class="milestone" data-milestone="1"><span class="milestone-year">2017</span><div class="milestone-copy"><span class="eyebrow">02 / MUSIKENE</span><h3>IR UN POCO<br>MÁS ALLÁ.</h3><p>Comienza una nueva etapa de formación en Musikene. Más música, más aprendizaje y nuevas formas de escuchar.</p></div><figure class="milestone-photo"><img src="assets/portrait-walk.webp" alt="Álvaro caminando con su instrumento, fotografía de archivo" width="424" height="584" loading="lazy"></figure></article>
-        <article class="milestone" data-milestone="2"><span class="milestone-year">2021</span><div class="milestone-copy"><span class="eyebrow">03 / HOLANDA</span><h3>CRUZAR<br>FRONTERAS.</h3><p>Un máster en Holanda abre otro capítulo. Ese mismo año comienza también su etapa con C. Tangana.</p></div><figure class="milestone-photo"><img src="assets/portrait-live.webp" alt="Retrato de Álvaro en el escenario, fotografía de archivo" width="382" height="482" loading="lazy"></figure></article>
-        <div class="timeline-rail" aria-hidden="true"><span class="active">2005 / CUÉLLAR</span><span>2017 / MUSIKENE</span><span>2021 / HOLANDA</span></div>
-      </div>
-    </section>
-    <section class="transition-scroll transition-tangana" data-scene="tangana" aria-label="Del origen al escenario con C. Tangana">
-      <div class="transition-stage">
-        <div class="transition-curtain"></div>
-        <p class="transition-kicker">2021 / LA MÚSICA NOS ENCUENTRA</p>
-        <div class="transition-title" aria-hidden="true"><span>C.</span><span>TANGANA</span></div>
-        <figure class="transition-photo"><img src="assets/tangana-live.webp" width="582" height="482" loading="lazy" alt="C. Tangana y la banda en el escenario"></figure>
-        <p class="transition-caption">DE ESCUCHAR.<br><em>A HACERSE ESCUCHAR.</em></p>
-        <span class="transition-counter" aria-hidden="true">2021</span>
-      </div>
-    </section>
+
     <section id="tangana" class="tangana section" aria-labelledby="tangana-title">
       <div class="section-meta"><span>2021 / COMIENZA CON C. TANGANA</span><span>CUANDO LA MÚSICA SE COMPARTE</span></div>
       <div class="chapter-heading"><span class="eyebrow">EN EL UNIVERSO DE</span><h2 id="tangana-title" class="reveal">C. TANGANA</h2><span class="chapter-tag">EL ESCENARIO ES DE TODOS ↗</span></div>

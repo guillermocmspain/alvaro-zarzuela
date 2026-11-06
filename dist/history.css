@@ -1,0 +1,75 @@
+/* Chronology inspired by the supplied film: rolling date, expanding seal,
+   full-bleed cobalt, organic scarlet wipe, vertical type and final portrait. */
+.history-scroll{height:1050svh;position:relative;background:var(--cream);--history-cobalt:#294b94;--history-scarlet:#d21e2c;scroll-margin-top:0}
+.history-stage{position:sticky;top:0;height:100svh;overflow:hidden;isolation:isolate}
+.history-training{position:absolute;inset:0;color:#193a78;transform:translateY(var(--training-y,0));opacity:var(--training-opacity,1)}
+.history-date{position:absolute;left:7%;top:34%;display:flex;font:800 min(24vw,43svh)/1 var(--display);letter-spacing:-.055em;height:1em}
+.date-column{height:1em;overflow:hidden;display:block;min-width:.43em}
+.date-reel{display:block;transform:translateY(var(--date-y,0));will-change:transform}
+.date-reel b{display:block;height:1em;font:inherit}
+.history-date-label{position:absolute;left:3%;top:78%;font:italic 13px Georgia,serif}
+.history-records{position:absolute;inset:0}
+.history-record{position:absolute;left:55%;top:18%;width:36%;max-width:560px;color:#101010;opacity:var(--record-opacity,0);transform:translateY(var(--record-y,70vh));border-left:1px solid #193a7833;padding:0 0 7vh 0;will-change:transform,opacity}
+.history-record:first-child{--record-opacity:1;--record-y:0px}
+.history-record>div{padding-left:24px}
+.history-record h3{font:400 11px/1.4 var(--body);letter-spacing:1.5px;margin-bottom:20px}
+.history-record h3 span{margin-right:14px;color:var(--history-cobalt)}
+.history-record p{font-size:clamp(14px,1.35vw,20px);line-height:1.45;max-width:450px}
+.history-record figure{width:clamp(100px,12vw,180px);margin:40px 0 0 -8px}
+.history-record img{height:26svh;object-fit:cover;border:2px solid var(--history-scarlet);padding:4px;background:var(--cream)}
+.history-record figcaption{font-size:7px;line-height:1.5;letter-spacing:.7px;padding-top:10px}
+.history-blue{position:absolute;inset:0;background:var(--history-cobalt);clip-path:circle(var(--blue-radius,0%) at 50% var(--seal-center,100%));z-index:2;will-change:clip-path}
+.history-seal{position:absolute;left:50%;top:var(--seal-center,100%);width:min(23vw,36svh);aspect-ratio:1;transform:translate(-50%,-50%) scale(var(--seal-scale,.25));opacity:var(--seal-opacity,0);z-index:3;pointer-events:none}
+.history-seal svg{width:100%;height:100%;stroke:var(--cream);stroke-width:3;fill:none;transform:rotate(var(--seal-rotation,-30deg))}
+.history-seal span{position:absolute;inset:0;display:grid;place-content:center;font:800 5vw var(--display);color:var(--cream);opacity:var(--seal-text,1)}
+.history-tangana{position:absolute;inset:0;z-index:4;color:var(--cream);opacity:var(--blue-content,0);transform:translateY(var(--blue-content-y,40vh));pointer-events:none}
+.history-split-year{position:absolute;top:19%;left:6%;right:6%;display:flex;justify-content:space-between;font:800 min(20vw,35svh)/.8 var(--display)}
+.history-tangana h3{position:absolute;left:23%;top:14%;width:54%;text-align:center;font:800 min(20vw,33svh)/.82 var(--display);letter-spacing:-.035em}
+.history-tangana h3>span:not(.history-accessible){display:block}
+.history-tangana p{position:absolute;left:69%;top:64%;width:25%;max-width:360px;font-size:clamp(13px,1.2vw,18px);line-height:1.5}
+.history-accessible{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.history-red{position:absolute;inset:0;background:var(--history-scarlet);z-index:5;clip-path:var(--red-wipe,polygon(0 110%,100% 110%,100% 100%,0 100%));will-change:clip-path}
+.history-bisbal{position:absolute;inset:0;color:var(--cream);z-index:6;opacity:var(--red-content,0);transform:translateY(var(--red-content-y,100vh));pointer-events:none}
+.history-bisbal h3{position:absolute;top:12%;left:12%;width:76%;font:800 min(16vw,28svh)/1.05 var(--display);letter-spacing:-.04em;text-align:center}
+.history-bisbal h3 span{display:block}
+.history-bisbal h3 span:last-child{font-size:.83em}
+.history-float{position:absolute;width:15vw;max-width:250px;transform:translateY(var(--float-y,0));padding:5px;border:1px solid var(--yellow);z-index:2}
+.history-float img{width:100%;aspect-ratio:1;object-fit:cover}
+.history-float-one{left:6%;top:30%}.history-float-two{right:8%;top:64%}
+.history-bisbal p{position:absolute;left:54%;top:102%;width:34%;max-width:470px;font-size:clamp(14px,1.4vw,20px);line-height:1.45}
+.history-finale{position:absolute;inset:0;background:#080a09;z-index:7;transform:translateY(var(--finale-y,100%));overflow:hidden}
+.history-finale img{position:absolute;right:7%;top:0;height:125%;width:65%;object-fit:contain;object-position:center top;transform:scale(var(--finale-scale,1.12));transform-origin:center 25%}
+.history-finale figcaption{position:absolute;left:6%;bottom:13%;font:800 clamp(40px,7vw,110px)/.9 var(--display);letter-spacing:-.02em;color:var(--cream);padding:0}
+@media(max-width:600px){
+ .history-scroll{height:1080svh}
+ .history-date{left:6%;top:15%;font-size:38vw}
+ .history-date-label{left:7%;top:34%;font-size:10px}
+ .history-record{left:7%;top:43%;width:86%;max-width:none;display:grid;grid-template-columns:1fr 29%;gap:15px;padding:0 0 20px}
+ .history-record>div{padding-left:14px}.history-record h3{font-size:9px;margin-bottom:15px}.history-record p{font-size:13px;line-height:1.5}
+ .history-record figure{width:100%;margin:0}.history-record img{height:20svh;padding:2px}.history-record figcaption{font-size:5px}
+ .history-seal{width:58vw}.history-seal span{font-size:14vw}
+ .history-split-year{top:18%;font-size:20vw;left:5%;right:5%}
+ .history-tangana h3{left:17%;width:66%;top:30%;font-size:30vw}
+ .history-tangana p{left:13%;top:77%;width:74%;font-size:12px}
+ .history-bisbal h3{top:20%;left:3%;width:94%;font-size:30vw;line-height:1.25}
+ .history-bisbal h3 span:last-child{font-size:.65em}
+ .history-float{width:24vw;padding:3px}.history-float-one{left:5%;top:14%}.history-float-two{right:6%;top:69%}
+ .history-bisbal p{left:10%;top:104%;width:80%;font-size:14px}
+ .history-finale img{width:155%;max-width:none;right:-30%;height:115%}
+ .history-finale figcaption{left:7%;bottom:14%;font-size:13vw;text-shadow:0 2px 20px #000}
+}
+/* Same chronology as a readable document without scroll animation. */
+.motion-reduced .history-scroll,html:not(.js) .history-scroll{height:auto}
+.motion-reduced .history-stage,html:not(.js) .history-stage{height:auto;position:relative}
+.motion-reduced .history-training,html:not(.js) .history-training{position:relative;opacity:1;transform:none;padding:80px 7%}
+.motion-reduced .history-date,.motion-reduced .history-date-label,.motion-reduced .history-blue,.motion-reduced .history-red,.motion-reduced .history-seal,html:not(.js) .history-date,html:not(.js) .history-date-label,html:not(.js) .history-blue,html:not(.js) .history-red,html:not(.js) .history-seal{display:none}
+.motion-reduced .history-records,html:not(.js) .history-records{position:relative}
+.motion-reduced .history-record,html:not(.js) .history-record{position:relative;left:auto;top:auto;width:100%;max-width:none;opacity:1;transform:none;margin:0 0 60px;padding:0 0 35px 20px;display:grid;grid-template-columns:1fr 25%;gap:25px}
+.motion-reduced .history-record figure,html:not(.js) .history-record figure{margin:0;width:100%}
+.motion-reduced .history-tangana,.motion-reduced .history-bisbal,html:not(.js) .history-tangana,html:not(.js) .history-bisbal{position:relative;opacity:1;transform:none;padding:70px 7%;background:var(--history-cobalt)}
+.motion-reduced .history-bisbal,html:not(.js) .history-bisbal{background:var(--history-scarlet)}
+.motion-reduced .history-tangana h3,.motion-reduced .history-bisbal h3,html:not(.js) .history-tangana h3,html:not(.js) .history-bisbal h3{position:relative;left:auto;top:auto;width:auto;font-size:clamp(60px,12vw,180px)}
+.motion-reduced .history-tangana p,.motion-reduced .history-bisbal p,html:not(.js) .history-tangana p,html:not(.js) .history-bisbal p{position:relative;left:auto;top:auto;width:auto;margin:30px auto 0}
+.motion-reduced .history-split-year,.motion-reduced .history-float,html:not(.js) .history-split-year,html:not(.js) .history-float{display:none}
+.motion-reduced .history-finale,html:not(.js) .history-finale{position:relative;height:85svh;transform:none}
+.motion-reduced .history-finale img,html:not(.js) .history-finale img{transform:none}

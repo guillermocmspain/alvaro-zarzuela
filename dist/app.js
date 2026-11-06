@@ -61,8 +61,8 @@
 
   const parallax = [...document.querySelectorAll('[data-parallax]')];
   const scenes = [...document.querySelectorAll('[data-scene]')];
-  const milestones = [...document.querySelectorAll('.milestone')];
-  const rail = [...document.querySelectorAll('.timeline-rail span')];
+  const historyRecords = [...document.querySelectorAll('.history-record')];
+  const dateReels = [...document.querySelectorAll('.date-reel')];
   const strip = document.querySelector('.sound-strip');
   const clamp = value => Math.max(0,Math.min(1,value));
   const ramp = (value,start,end) => clamp((value-start)/(end-start));
@@ -106,15 +106,41 @@
           '--history-opacity':history,
           '--history-title-x':`${(1-history)*24}vw`
         });
-      } else if(scene.dataset.scene==='timeline') {
-        const segment=Math.min(2,Math.floor(p*3));
-        const position=segment===2?2:segment+ease(ramp(p*3-segment,.72,1));
-        milestones.forEach((milestone,index) => {
+      } else if(scene.dataset.scene==='history') {
+        const first=ease(ramp(p,.065,.115));
+        const second=ease(ramp(p,.185,.235));
+        const position=first+second;
+        historyRecords.forEach((record,index)=>{
           const distance=index-position;
-          style(milestone,{'--milestone-opacity':clamp(1-Math.abs(distance)*2),'--milestone-y':`${distance*140}px`,'--milestone-rotation':`${distance*8-4}deg`});
+          style(record,{'--record-opacity':clamp(1-Math.abs(distance)*1.35),'--record-y':`${distance*70}vh`});
         });
-        rail.forEach((item,index)=>item.classList.toggle('active',index===Math.round(position)));
-        scene.style.setProperty('--timeline-progress',p);
+        dateReels.forEach((reel,index)=>{
+          const offset=index*.007;
+          const roll=ease(ramp(p,.065+offset,.115+offset))+ease(ramp(p,.185+offset,.235+offset));
+          reel.style.setProperty('--date-y',`${-roll*100/3}%`);
+        });
+        const bloom=ease(ramp(p,.29,.46));
+        const red=ease(ramp(p,.60,.72));
+        const edge=110-red*125;
+        const wave=Array.from({length:101},(_,i)=>`${i}% ${(edge+Math.sin(i*.18)*2.5+Math.sin(i*.61)*.7).toFixed(2)}%`).join(',');
+        style(scene,{
+          '--training-y':`${-ease(ramp(p,.27,.37))*110}vh`,
+          '--training-opacity':1-ease(ramp(p,.32,.39)),
+          '--seal-center':`${110-ease(ramp(p,.28,.43))*60}%`,
+          '--blue-radius':`${bloom*82}%`,
+          '--seal-scale':.3+bloom*12,
+          '--seal-opacity':ease(ramp(p,.29,.32))*(1-ease(ramp(p,.43,.50))),
+          '--seal-text':1-ease(ramp(p,.36,.42)),
+          '--seal-rotation':`${-35+bloom*100}deg`,
+          '--blue-content':ease(ramp(p,.39,.46)),
+          '--blue-content-y':`${(1-ease(ramp(p,.40,.49)))*80-ease(ramp(p,.55,.68))*125}vh`,
+          '--red-wipe':`polygon(${wave},100% 100%,0% 100%)`,
+          '--red-content':ease(ramp(p,.61,.67)),
+          '--red-content-y':`${(1-ease(ramp(p,.61,.72)))*100-ease(ramp(p,.74,.84))*90}vh`,
+          '--float-y':`${-ease(ramp(p,.66,.84))*12}vh`,
+          '--finale-y':`${(1-ease(ramp(p,.84,.95)))*100}%`,
+          '--finale-scale':1.12-ease(ramp(p,.84,1))*.12
+        });
       } else {
         const curtain=ease(ramp(p,0,.32));
         const arrive=ease(ramp(p,.08,.42));
