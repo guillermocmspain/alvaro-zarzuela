@@ -2,6 +2,7 @@ const sharp = require('sharp');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const images = {
+  'walk-entry': 'dc209ff1-12c5-4be7-8a89-c2ffce777baa',
   'live-mono': '1a647eec-a2d6-4ecf-9183-79d995efaaf7',
   'portrait-live': '4326e986-0e50-4a25-a567-8f243d7b5cef',
   'portrait-trombone': 'bda2164d-dfd9-4d53-9cba-a64c9910ad7e',

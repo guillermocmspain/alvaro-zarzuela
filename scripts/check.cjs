@@ -8,5 +8,5 @@ const broken=[...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(match=>match[1]).
 if(broken.length)throw Error('Broken resources or anchors: '+broken.join(', '));
 const photos=fs.readdirSync('dist/assets').filter(name=>name.endsWith('.webp')&&!name.includes('-small'));
 console.log('Syntax, local resources and internal anchors OK');
-console.log('10 main photographs, total KB:',Math.round(photos.reduce((sum,name)=>sum+fs.statSync('dist/assets/'+name).size,0)/1024));
+console.log(`${photos.length} main photographs, total KB:`,Math.round(photos.reduce((sum,name)=>sum+fs.statSync('dist/assets/'+name).size,0)/1024));
 console.log('Application JS bytes:',fs.statSync('dist/app.js').size);

@@ -2,6 +2,21 @@
   'use strict';
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   document.documentElement.classList.add('js');
+  let manualMotion = false;
+  const motionDisabled = () => reducedMotion.matches || manualMotion;
+  const motionButton = document.querySelector('.motion-toggle');
+  const syncMotion = () => {
+    document.documentElement.classList.toggle('motion-reduced',motionDisabled());
+    motionButton.setAttribute('aria-pressed',String(motionDisabled()));
+    motionButton.setAttribute('aria-label',motionDisabled()?'Activar las animaciones':'Reducir las animaciones');
+    motionButton.querySelector('span').textContent=motionDisabled()?'OFF':'ON';
+  };
+  syncMotion();
+  motionButton.addEventListener('click',() => {
+    manualMotion=!manualMotion;
+    syncMotion();
+    schedule();
+  });
   const menuButton = document.querySelector('.menu-toggle');
   const navigation = document.querySelector('.navigation');
   const header = document.querySelector('.header');
@@ -48,6 +63,43 @@
   const chapters = chapterLinks.map(link => document.querySelector(link.hash));
   const progress = document.querySelector('.progress');
   const parallax = [...document.querySelectorAll('[data-parallax]')];
+  const scenes = [...document.querySelectorAll('[data-scene]')];
+  const milestones = [...document.querySelectorAll('.milestone')];
+  const rail = [...document.querySelectorAll('.timeline-rail span')];
+  const strip = document.querySelector('.sound-strip');
+  const clamp = value => Math.max(0,Math.min(1,value));
+  const ramp = (value,start,end) => clamp((value-start)/(end-start));
+  const ease = value => value*value*(3-2*value);
+  const style = (element,values) => Object.entries(values).forEach(([key,value]) => element.style.setProperty(key,value));
+  const updateScenes = () => {
+    scenes.forEach(scene => {
+      const rect=scene.getBoundingClientRect();
+      if(rect.bottom<0 || rect.top>innerHeight)return;
+      const p=clamp(-rect.top/Math.max(1,rect.height-innerHeight));
+      if(scene.dataset.scene==='hero') {
+        const shrink=ease(ramp(p,.08,.78));
+        const split=ease(ramp(p,.05,.65));
+        style(scene,{'--hero-scale':1-shrink*.64,'--name-left':`${-split*75}vw`,'--name-right':`${split*75}vw`,'--walker-scale':1+shrink*.08,'--hero-detail':1-ramp(p,0,.25),'--bridge-opacity':ease(ramp(p,.3,.65))});
+      } else if(scene.dataset.scene==='timeline') {
+        const segment=Math.min(2,Math.floor(p*3));
+        const position=segment===2?2:segment+ease(ramp(p*3-segment,.72,1));
+        milestones.forEach((milestone,index) => {
+          const distance=index-position;
+          style(milestone,{'--milestone-opacity':clamp(1-Math.abs(distance)*2),'--milestone-y':`${distance*140}px`,'--milestone-rotation':`${distance*8-4}deg`});
+        });
+        rail.forEach((item,index)=>item.classList.toggle('active',index===Math.round(position)));
+        scene.style.setProperty('--timeline-progress',p);
+      } else {
+        const curtain=ease(ramp(p,0,.32));
+        const arrive=ease(ramp(p,.08,.42));
+        const depart=ease(ramp(p,.68,1));
+        const photo=ease(ramp(p,.24,.64));
+        style(scene,{'--curtain-inset':`${100*(1-curtain)}%`,'--circle-radius':`${curtain*75}%`,'--curtain-side':`${50*(1-curtain)}%`,'--scene-opacity':ramp(p,.1,.3),'--type-left':`${-70*(1-arrive)-depart*85}vw`,'--type-right':`${70*(1-arrive)+depart*85}vw`,'--photo-opacity':ramp(p,.24,.38),'--photo-inset':`${50*(1-photo)}%`,'--photo-scale':.72+photo*.28,'--photo-rotate':`${-9*(1-photo)}deg`,'--photo-gray':1-photo,'--photo-tint':.45*(1-photo),'--caption-opacity':ramp(p,.68,.9),'--caption-y':`${30*(1-ramp(p,.68,.9))}px`});
+      }
+    });
+    const stripTop=strip.getBoundingClientRect().top;
+    if(stripTop<innerHeight && stripTop>-300)strip.style.setProperty('--strip-shift',`${(stripTop-innerHeight)*.2}px`);
+  };
   let scheduled = false;
   const updateScroll = () => {
     scheduled = false;
@@ -59,7 +111,8 @@
       if(index===active)link.setAttribute('aria-current','location');
       else link.removeAttribute('aria-current');
     });
-    if(reducedMotion.matches)return;
+    if(motionDisabled())return;
+    updateScenes();
     parallax.forEach(element => {
       const rect = element.getBoundingClientRect();
       if(rect.bottom < -100 || rect.top > innerHeight + 100)return;
@@ -70,7 +123,7 @@
   const schedule = () => {if(!scheduled){scheduled=true;requestAnimationFrame(updateScroll);}};
   addEventListener('scroll',schedule,{passive:true});
   addEventListener('resize',schedule,{passive:true});
-  reducedMotion.addEventListener('change',schedule);
+  reducedMotion.addEventListener('change',() => {syncMotion();schedule();});
   updateScroll();
 
   const dialog = document.querySelector('.video-dialog');
@@ -99,4 +152,57 @@
     document.body.classList.remove('locked');
     videoTrigger?.focus({preventScroll:true});
   });
+
+  // Entrance progress represents settled critical assets, not a simulated timer.
+  const entrance=document.querySelector('.entrance');
+  const enter=document.querySelector('.enter-button');
+  const label=document.querySelector('.enter-label');
+  const status=document.querySelector('#entrance-status');
+  let entranceLeaving=false;
+  const finishEntrance=() => {
+    if(!entrance.open)return;
+    entrance.close();
+    entrance.classList.remove('is-leaving');
+    document.body.classList.remove('locked');
+    entranceLeaving=false;
+    const title=document.querySelector('#hero-title');
+    title.setAttribute('tabindex','-1');
+    title.focus({preventScroll:true});
+    schedule();
+  };
+  const leaveEntrance=() => {
+    if(entranceLeaving)return;
+    entranceLeaving=true;
+    if(motionDisabled()){finishEntrance();return;}
+    entrance.classList.add('is-leaving');
+    setTimeout(finishEntrance,1200); // Also completes if CSS animation events are unavailable.
+  };
+  entrance.addEventListener('animationend',event=>{if(event.target===entrance)finishEntrance();});
+  entrance.addEventListener('cancel',event=>{event.preventDefault();finishEntrance();});
+  entrance.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();finishEntrance();}});
+  enter.addEventListener('click',leaveEntrance);
+  const openEntrance=() => {
+    scrollTo({top:0,behavior:'instant'});
+    entrance.showModal();
+    document.body.classList.add('locked');
+    if(!enter.disabled)enter.focus({preventScroll:true});
+  };
+  document.querySelector('.replay-entrance').addEventListener('click',openEntrance);
+  if(!location.hash || location.hash==='#inicio')openEntrance();
+  const preload=new Image();
+  preload.src='assets/walk-entry.webp';
+  const assets=[preload.decode(),document.fonts.load('800 24px Display'),document.fonts.load('400 16px Body')];
+  let settled=0;
+  const ready=()=>{
+    enter.disabled=false;
+    label.textContent='INGRESAR';
+    status.textContent='EL ESCENARIO ESTÁ LISTO';
+    entrance.style.setProperty('--loaded','1');
+  };
+  const timeout=setTimeout(ready,8000); // Never trap the visitor behind a failed font or image.
+  Promise.allSettled(assets.map(asset=>Promise.resolve(asset).finally(()=>{
+    settled++;
+    entrance.style.setProperty('--loaded',settled/assets.length);
+    if(enter.disabled)label.textContent=`${Math.round(settled/assets.length*100)}%`;
+  }))).then(()=>{clearTimeout(timeout);ready();});
 })();
