@@ -11,13 +11,13 @@
 .hero-bridge span:first-child{right:72%;transform:translate(calc(-1 * var(--bridge-drift,30vw)),-50%)}
 .hero-bridge span:last-child{left:72%;transform:translate(var(--bridge-drift,30vw),-50%)}
 .hero-arrival{position:absolute;inset:var(--frame-y,0%) var(--frame-x,0%);z-index:3;overflow:hidden;pointer-events:none}
-.arrival-reveal{position:absolute;inset:0;background:var(--cream);clip-path:var(--arrival-clip,polygon(0 110%,100% 110%,100% 100%,0 100%));will-change:clip-path}
+.arrival-reveal{position:absolute;inset:0;background:rgb(238 235 223 / calc(1 - var(--history-progress,0)));clip-path:var(--arrival-clip,polygon(0 110%,100% 110%,100% 100%,0 100%));will-change:clip-path}
 .arrival-reveal img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;translate:0 var(--arrival-rise,18%);will-change:translate}
 .hero-frame{position:absolute;inset:var(--frame-y,0%) var(--frame-x,0%);border:1px solid #b63e3180;outline:3px solid var(--cream);outline-offset:3px;z-index:4;opacity:var(--frame-opacity,0);pointer-events:none}
 .arrival-caption{position:absolute;top:84%;left:15%;width:70%;text-align:center;z-index:4;font:800 clamp(22px,2.5vw,38px)/1 var(--display);opacity:var(--arrival-caption,0);translate:0 calc((1 - var(--arrival-caption,0))*18px);color:#101010}
 .arrival-caption span{display:block;margin-top:12px;font:400 9px/1.5 var(--body);letter-spacing:1.5px}
 .hero-arrival,.hero-frame{transform:translateX(var(--history-shift,0)) scale(var(--history-scale,1));transform-origin:left center;will-change:transform}
-.history-transition-title{position:absolute;left:54%;top:50%;width:42%;margin:0;color:#101010;font:800 min(11vw,20svh)/.9 var(--display);letter-spacing:-.035em;white-space:nowrap;z-index:5;opacity:var(--history-opacity,0);transform:translate(var(--history-title-x,24vw),-50%);pointer-events:none}
+.history-transition-title{position:absolute;left:35%;top:31%;width:63%;margin:0;color:#101010;font:800 min(18vw,31svh)/.9 var(--display);letter-spacing:-.035em;white-space:nowrap;z-index:2;opacity:var(--history-opacity,0);transform:translate(var(--history-title-x,24vw),-50%);pointer-events:none}
 @media(max-width:600px){
   .hero-scroll{height:390svh}
   .hero-bridge{font-size:21vw}
@@ -25,7 +25,12 @@
   .hero-bridge span:last-child{top:78%;left:0;width:100%;font-size:.76em;text-align:center}
   .arrival-caption{top:86%;left:5%;width:90%;font-size:23px}
   .arrival-caption span{font-size:7px;letter-spacing:.8px}
-  .history-transition-title{left:53%;width:44%;font-size:11.5vw}
+  .hero-arrival{inset:calc(var(--frame-y,0%) - var(--history-progress,0)*12%) calc(var(--frame-x,0%) - var(--history-progress,0)*9%) calc(var(--frame-y,0%) - var(--history-progress,0)*24%)}
+  .arrival-reveal img{width:calc(100% + var(--history-progress,0)*65%);max-width:none;left:calc(var(--history-progress,0)*-5vw);object-position:left bottom}
+  .history-transition-title{left:47%;top:16%;width:51%;font-size:min(34vw,20svh);line-height:1.42;transform:translateX(var(--history-title-x,24vw))}
+  .history-transition-title span{display:block}
+  .history-transition-title span:nth-child(2){padding-left:5vw}
+  .history-transition-title span:nth-child(3){margin-left:5vw;translate:0 3svh}
 }
 /* Show both photographs in reading order when animation is disabled. */
 .motion-reduced .hero-scroll,html:not(.js) .hero-scroll{height:auto}
@@ -40,3 +45,5 @@
 .motion-reduced .arrival-caption,html:not(.js) .arrival-caption{position:relative;top:auto;left:auto;width:auto;padding:25px 6vw 60px;opacity:1;translate:none}
 .motion-reduced .hero-arrival,html:not(.js) .hero-arrival{transform:none}
 .motion-reduced .history-transition-title,html:not(.js) .history-transition-title{position:relative;left:auto;top:auto;width:auto;padding:0 6vw 45px;text-align:center;opacity:1;transform:none;font-size:clamp(56px,11vw,160px)}
+.motion-reduced .history-transition-title span,html:not(.js) .history-transition-title span{display:inline;padding:0;margin:0;translate:none}
+.motion-reduced .arrival-reveal img,html:not(.js) .arrival-reveal img{width:100%;left:0}

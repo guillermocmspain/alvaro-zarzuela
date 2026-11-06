@@ -104,8 +104,8 @@
           '--arrival-rise':`${(1-ease(ramp(p,.4,.85)))*18}%`,
           '--frame-opacity':ease(ramp(p,.06,.18)),
           '--arrival-caption':ease(ramp(p,.8,.94))*(1-history),
-          '--history-shift':`${-history*(mobile?4:23)}vw`,
-          '--history-scale':1-history*(mobile?.43:0),
+          '--history-shift':`${-history*(mobile?0:23)}vw`,
+          '--history-progress':history,
           '--history-opacity':history,
           '--history-title-x':`${(1-history)*24}vw`
         });
