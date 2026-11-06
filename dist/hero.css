@@ -12,6 +12,14 @@
 .story .origin-grid{padding-top:90px}
 .motion-reduced .hero-portrait{transform:none}
 .motion-reduced .hero-cta{opacity:1}
+@media(min-width:901px){
+  .hero-title{top:19%;width:68%;font-size:min(22vw,32svh);line-height:.8}
+  .hero-title span+span{font-size:1em;margin-top:.04em}
+  .hero-portrait{top:9svh;bottom:auto;right:max(2vw,calc((100vw - 150svh)/2));width:min(49vw,74svh)}
+  .hero-note{bottom:18%;font-size:clamp(20px,2vw,31px)}
+  .hero-cta{bottom:9%;min-height:48px}
+  .hero-bottom{min-height:42px}
+}
 @media(max-width:900px) and (min-width:601px){.hero-title{top:27%;font-size:17.5vw}.hero-portrait{right:-3vw;width:55vw;bottom:6svh}.hero-note{font-size:22px;bottom:23%}.hero-cta{bottom:13%}}
 @media(max-width:600px){
   .header{align-items:flex-start;padding-top:12px;background:#101010}
