@@ -75,9 +75,11 @@
     scenes.forEach(scene => {
       const rect=scene.getBoundingClientRect();
       if(rect.bottom<0 || rect.top>innerHeight)return;
-      const p=clamp(-rect.top/Math.max(1,rect.height-innerHeight));
+      let p=clamp(-rect.top/Math.max(1,rect.height-innerHeight));
       if(scene.dataset.scene==='hero') {
-        // One continuous scroll-controlled frame: contract, wipe, settle.
+        // Preserve the first sequence, then slide into a held history composition.
+        const history=ease(ramp(p,.69,.89));
+        p=clamp(p/.64);
         const contract=ease(ramp(p,.06,.58));
         const wipe=ease(ramp(p,.38,.78));
         const mobile=innerWidth<=600;
@@ -96,12 +98,16 @@
           '--portrait-drift':`${-contract*(mobile?0:18)}vw`,
           '--portrait-rise':`${-ease(ramp(p,.32,.8))*28}vh`,
           '--outgoing-opacity':1-ease(ramp(p,.68,.8)),
-          '--bridge-opacity':ease(ramp(p,.1,.4)),
+          '--bridge-opacity':ease(ramp(p,.1,.4))*(1-history),
           '--bridge-drift':`${(1-contract)*30}vw`,
           '--arrival-clip':`polygon(${wave},100% 100%,0% 100%)`,
           '--arrival-rise':`${(1-ease(ramp(p,.4,.85)))*18}%`,
           '--frame-opacity':ease(ramp(p,.06,.18)),
-          '--arrival-caption':ease(ramp(p,.8,.94))
+          '--arrival-caption':ease(ramp(p,.8,.94))*(1-history),
+          '--history-shift':`${-history*(mobile?4:23)}vw`,
+          '--history-scale':1-history*(mobile?.43:0),
+          '--history-opacity':history,
+          '--history-title-x':`${(1-history)*24}vw`
         });
       } else if(scene.dataset.scene==='timeline') {
         const segment=Math.min(2,Math.floor(p*3));

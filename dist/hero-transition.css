@@ -1,6 +1,6 @@
 /* Reference choreography: full canvas -> central frame -> rising portrait.
    Native scrolling remains reversible. No timers, wheel interception or video. */
-.hero-scroll{height:310svh}
+.hero-scroll{height:430svh}
 .hero-panel{transform:none;clip-path:inset(var(--frame-y,0%) var(--frame-x,0%));opacity:var(--outgoing-opacity,1);will-change:clip-path}
 .hero-panel:after{display:none}
 .hero-title{translate:0 var(--title-rise,0);opacity:var(--title-opacity,1)}
@@ -16,13 +16,16 @@
 .hero-frame{position:absolute;inset:var(--frame-y,0%) var(--frame-x,0%);border:1px solid #b63e3180;outline:3px solid var(--cream);outline-offset:3px;z-index:4;opacity:var(--frame-opacity,0);pointer-events:none}
 .arrival-caption{position:absolute;top:84%;left:15%;width:70%;text-align:center;z-index:4;font:800 clamp(22px,2.5vw,38px)/1 var(--display);opacity:var(--arrival-caption,0);translate:0 calc((1 - var(--arrival-caption,0))*18px);color:#101010}
 .arrival-caption span{display:block;margin-top:12px;font:400 9px/1.5 var(--body);letter-spacing:1.5px}
+.hero-arrival,.hero-frame{transform:translateX(var(--history-shift,0)) scale(var(--history-scale,1));transform-origin:left center;will-change:transform}
+.history-transition-title{position:absolute;left:54%;top:50%;width:42%;margin:0;color:#101010;font:800 min(11vw,20svh)/.9 var(--display);letter-spacing:-.035em;white-space:nowrap;z-index:5;opacity:var(--history-opacity,0);transform:translate(var(--history-title-x,24vw),-50%);pointer-events:none}
 @media(max-width:600px){
-  .hero-scroll{height:280svh}
+  .hero-scroll{height:390svh}
   .hero-bridge{font-size:21vw}
   .hero-bridge span:first-child{top:23%;right:0;width:100%;text-align:center}
   .hero-bridge span:last-child{top:78%;left:0;width:100%;font-size:.76em;text-align:center}
   .arrival-caption{top:86%;left:5%;width:90%;font-size:23px}
   .arrival-caption span{font-size:7px;letter-spacing:.8px}
+  .history-transition-title{left:53%;width:44%;font-size:11.5vw}
 }
 /* Show both photographs in reading order when animation is disabled. */
 .motion-reduced .hero-scroll,html:not(.js) .hero-scroll{height:auto}
@@ -35,3 +38,5 @@
 .motion-reduced .arrival-reveal img,html:not(.js) .arrival-reveal img{translate:none}
 .motion-reduced .hero-frame,html:not(.js) .hero-frame{display:none}
 .motion-reduced .arrival-caption,html:not(.js) .arrival-caption{position:relative;top:auto;left:auto;width:auto;padding:25px 6vw 60px;opacity:1;translate:none}
+.motion-reduced .hero-arrival,html:not(.js) .hero-arrival{transform:none}
+.motion-reduced .history-transition-title,html:not(.js) .history-transition-title{position:relative;left:auto;top:auto;width:auto;padding:0 6vw 45px;text-align:center;opacity:1;transform:none;font-size:clamp(56px,11vw,160px)}
