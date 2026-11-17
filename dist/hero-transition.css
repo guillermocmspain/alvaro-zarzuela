@@ -23,7 +23,7 @@
   color:#24231f;font:italic clamp(18px,1.65vw,32px)/1.4 Georgia,serif;
   opacity:var(--history-opacity,0);translate:0 calc((1 - var(--history-opacity,0))*22px);
 }
-@media(max-width:600px){
+@media(max-width:600px),(min-width:601px) and (max-width:1024px) and (orientation:portrait){
   .history-reflection{display:none}
   .hero-scroll{height:390svh}
   .hero-bridge{font-size:21vw}
@@ -34,12 +34,25 @@
   .hero-arrival{inset:calc(var(--frame-y,0%) - var(--history-progress,0)*12%) calc(var(--frame-x,0%) - var(--history-progress,0)*9%) calc(var(--frame-y,0%) - var(--history-progress,0)*24%)}
   .arrival-reveal img{width:calc(100% + var(--history-progress,0)*65%);max-width:none;left:calc(var(--history-progress,0)*-5vw);object-position:left bottom}
   .history-transition-title{
-    left:6%;top:max(68px,10svh);width:88%;font-size:min(32vw,16svh);
-    line-height:.86;transform:translateX(var(--history-title-x,24vw))
+    left:4%;top:max(70px,9svh);width:92%;font-size:min(47vw,21svh);
+    line-height:.76;transform:translateX(var(--history-title-x,24vw))
   }
   .history-transition-title span{display:block;width:max-content}
-  .history-transition-title span:nth-child(2){margin-left:20vw}
-  .history-transition-title span:nth-child(3){margin-left:24vw}
+  .history-transition-title span:nth-child(2){margin-left:22vw}
+  .history-transition-title span:nth-child(3){margin-left:41vw}
+}
+@media(max-width:600px) and (max-aspect-ratio:1/1) and (min-aspect-ratio:1/2){
+  .hero-arrival{top:calc(var(--frame-y,0%) + var(--history-progress,0)*10%)}
+}
+@media(min-width:601px) and (max-width:1024px) and (orientation:portrait){
+  .history-transition-title{left:7%;width:87%;font-size:min(41vw,22svh)}
+  .history-transition-title span:nth-child(3){margin-left:39vw}
+  .hero-arrival{top:calc(var(--frame-y,0%) + var(--history-progress,0)*10%)}
+  .arrival-reveal img{left:calc(var(--history-progress,0)*8vw)}
+}
+@media(min-width:601px) and (max-width:1366px) and (orientation:landscape){
+  .history-transition-title{left:35%;font-size:min(19vw,31svh)}
+  .history-reflection{top:54%;width:min(44%,41ch);font-size:clamp(17px,2vw,26px)}
 }
 /* Show both photographs in reading order when animation is disabled. */
 .motion-reduced .hero-scroll,html:not(.js) .hero-scroll{height:auto}

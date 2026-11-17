@@ -79,7 +79,7 @@
         p=clamp(p/.64);
         const contract=ease(ramp(p,.06,.58));
         const wipe=ease(ramp(p,.38,.78));
-        const mobile=innerWidth<=600;
+        const mobile=matchMedia("(max-width:600px),(max-width:1024px) and (orientation:portrait)").matches;
         const edge=110-wipe*120;
         const wave=Array.from({length:121},(_,i)=>{
           const x=i*100/120;
