@@ -20,7 +20,7 @@
 .history-transition-title{position:absolute;left:35%;top:31%;width:63%;margin:0;color:#101010;font:800 min(18vw,31svh)/.9 var(--display);letter-spacing:-.035em;white-space:nowrap;z-index:2;opacity:var(--history-opacity,0);transform:translate(var(--history-title-x,24vw),-50%);pointer-events:none}
 .history-reflection{
   position:absolute;top:57%;left:50%;width:min(45%,49ch);margin:0;
-  color:#24231f;font:italic clamp(18px,1.65vw,32px)/1.4 Georgia,serif;
+  color:#24231f;font:400 clamp(18px,1.55vw,28px)/1.5 var(--body);
   opacity:var(--history-opacity,0);translate:0 calc((1 - var(--history-opacity,0))*22px);
 }
 @media(max-width:600px),(min-width:601px) and (max-width:1024px) and (orientation:portrait){
