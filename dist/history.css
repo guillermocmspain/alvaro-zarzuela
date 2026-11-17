@@ -28,8 +28,15 @@
  .history-record{left:7%;top:43%;width:86%;max-width:none;display:grid;grid-template-columns:1fr 29%;gap:15px;padding:0 0 20px}
  .history-record>div{padding-left:14px}.history-record h3{font-size:9px;margin-bottom:15px}.history-record p{font-size:13px;line-height:1.5}
  .history-record figure{width:100%;margin:0}.history-record img{height:20svh;padding:2px}.history-record figcaption{font-size:5px}
- .history-finale img{width:155%;max-width:none;right:-30%;height:115%}
- .history-finale figcaption{left:7%;bottom:14%;font-size:13vw;text-shadow:0 2px 20px #000}
+ .history-finale{
+   display:grid;grid-template-rows:minmax(0,1fr) auto;gap:2svh;
+   padding:max(76px,env(safe-area-inset-top)) 5vw max(7svh,46px)
+ }
+ .history-finale img{
+   position:static;width:100%;height:100%;min-height:0;
+   object-position:center bottom;transform:none
+ }
+ .history-finale figcaption{position:static;font-size:min(13vw,7svh)}
 }
 /* Same chronology as a readable document without scroll animation. */
 .motion-reduced .history-scroll,html:not(.js) .history-scroll{height:auto}
@@ -45,4 +52,4 @@
 .history-finale figcaption{opacity:var(--caption-opacity,0);translate:0 var(--caption-rise,32px)}
 .motion-reduced .history-finale,html:not(.js) .history-finale{clip-path:none}
 .motion-reduced .history-finale figcaption,html:not(.js) .history-finale figcaption{opacity:1;translate:none}
-@media(max-width:600px){.history-finale{clip-path:circle(var(--iris,0%) at 77% 56%)}}
+@media(max-width:600px){.history-finale{clip-path:circle(var(--iris,0%) at 50% 48%)}}
