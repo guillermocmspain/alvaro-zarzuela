@@ -62,6 +62,8 @@
   const parallax = [...document.querySelectorAll('[data-parallax]')];
   const scenes = [...document.querySelectorAll('[data-scene]')];
   const historyRecords = [...document.querySelectorAll('.history-record')];
+  const historyThumbnail = document.querySelector('.history-record picture img');
+  const historyStage = document.querySelector('.history-stage');
   const dateReels = [...document.querySelectorAll('.date-reel')];
   const strip = document.querySelector('.sound-strip');
   const clamp = value => Math.max(0,Math.min(1,value));
@@ -121,8 +123,19 @@
         });
         const reveal=ease(ramp(p,.61,.90));
         const title=ease(ramp(p,.80,.93));
+        const mobileFinale=matchMedia('(max-width:600px)').matches;
+        if(mobileFinale && reveal>0){
+          const frame=historyStage.getBoundingClientRect();
+          const photo=historyThumbnail.getBoundingClientRect();
+          // Start inside the thumbnail's two-pixel border and four-pixel mat.
+          const remaining=1-reveal;
+          const edges=[photo.top-frame.top,frame.right-photo.right,frame.bottom-photo.bottom,photo.left-frame.left];
+          scene.style.setProperty('--photo-inset',edges.map(edge=>(edge+6)*remaining+'px').join(' '));
+        }
         style(scene,{
-          '--training-y':(-reveal*9)+'vh',
+          '--training-y':(mobileFinale?0:-reveal*9)+'vh',
+          '--photo-visible':reveal>0?1:0,
+          '--photo-padding':(reveal*72)+'px',
           '--training-opacity':1-reveal,
           '--iris':(reveal*155)+'%',
           '--finale-scale':1.08-reveal*.08,

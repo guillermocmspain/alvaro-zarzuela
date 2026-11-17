@@ -52,4 +52,16 @@
 .history-finale figcaption{opacity:var(--caption-opacity,0);translate:0 var(--caption-rise,32px)}
 .motion-reduced .history-finale,html:not(.js) .history-finale{clip-path:none}
 .motion-reduced .history-finale figcaption,html:not(.js) .history-finale figcaption{opacity:1;translate:none}
-@media(max-width:600px){.history-finale{clip-path:circle(var(--iris,0%) at 50% 48%)}}
+@media(max-width:600px){
+ .history-record picture img{display:block;width:100%;object-fit:contain;background:#080a09}
+ .js:not(.motion-reduced) .history-finale{
+   display:block;inset:var(--photo-inset,0);padding:0;clip-path:none;opacity:var(--photo-visible,0)
+ }
+ .js:not(.motion-reduced) .history-finale img{
+   position:absolute;inset:var(--photo-padding,0px) 0 0;height:calc(100% - var(--photo-padding,0px));
+   object-fit:contain;object-position:center
+ }
+ .js:not(.motion-reduced) .history-finale figcaption{
+   position:absolute;left:6%;bottom:max(8svh,48px);text-shadow:0 2px 8px #080a09
+ }
+}
