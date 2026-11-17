@@ -24,13 +24,13 @@ Abrir http://127.0.0.1:4321. Los archivos publicables están en `dist/` y funcio
 
 ## Editar
 
-- `dist/index.html`: textos, orden de capítulos, fotografías y enlaces a publicaciones. Las URL de Instagram se definen mediante `data-video` y los títulos mediante `data-title`.
+- `dist/index.html`: textos, orden de capítulos, fotografías y enlaces a publicaciones. Los identificadores de YouTube se definen mediante `data-video` y los títulos mediante `data-title`.
 - `dist/style.css`: diseño adaptable, colores, tipografía y movimiento reducido.
 - `dist/motion.css`: entrada, máscaras, escenas fijadas, cronología y adaptación del movimiento.
 - `dist/app.js`: revelado de secciones, paralaje ligero, progreso, navegación y reproductor modal.
 - `dist/assets/`: imágenes WebP y fuentes locales con sus licencias OFL.
 
-No hay librerías de JavaScript en producción ni peticiones a Instagram hasta abrir un vídeo. El scroll es nativo, sin interceptar la rueda ni el teclado. La animación de scroll se agrupa con requestAnimationFrame; el resto usa CSS e IntersectionObserver. Las fotografías secundarias tienen carga diferida y dimensiones explícitas. Se respeta prefers-reduced-motion. Hay enlace de salto, foco visible, diálogo nativo con Escape, retirada del iframe al cerrar y retorno de foco al activador.
+No hay librerías de JavaScript en producción ni peticiones a YouTube hasta abrir un vídeo. El scroll es nativo, sin interceptar la rueda ni el teclado. La animación de scroll se agrupa con requestAnimationFrame; el resto usa CSS e IntersectionObserver. Las fotografías secundarias tienen carga diferida y dimensiones explícitas. Se respeta prefers-reduced-motion. Hay enlace de salto, foco visible, diálogo nativo con Escape, retirada del iframe al cerrar y retorno de foco al activador.
 
 ## Fotografías y fidelidad
 
@@ -40,16 +40,15 @@ Para regenerar los derivados: `npm ci`, añadir los PNG originales en `originals
 
 ## Vídeos y contenido pendiente
 
-Los cuatro enlaces se integran mediante el reproductor de Instagram bajo demanda. El vídeo de C. Tangana está en la tercera diapositiva del carrusel; se muestra una indicación. Instagram controla si una publicación se reproduce dentro del iframe o remite a su aplicación, y puede exigir sesión/cookies o restringir una publicación. Siempre existe enlace directo. Para reproducción totalmente independiente se necesitan los archivos de vídeo autorizados; no se simula vídeo mediante una imagen ni se promete control sobre Instagram.
+La galería incluye los siete Shorts del canal. Las miniaturas WebP son locales y cada tarjeta carga el reproductor de YouTube al pulsarla.
 
-Las fotos de las tarjetas son portadas editoriales; no se presentan como fotogramas de los reels. Los retratos de la cronología son imágenes de archivo, no fotos fechadas en los años representados. Los hitos de 2005, 2017, 2021 y 2022 proceden del usuario. El año 1998 sigue explícitamente pendiente de confirmación. No se atribuyen premios o giras no confirmados. No se inventó correo de contacto. El prototipo lleva `noindex` hasta validar el contenido.
+Los retratos de la cronología son imágenes de archivo, no fotos fechadas en los años representados. Los hitos de 2005, 2017, 2021 y 2022 proceden del usuario. El año 1998 sigue explícitamente pendiente de confirmación. No se atribuyen premios o giras no confirmados. No se inventó correo de contacto. El prototipo lleva `noindex` hasta validar el contenido.
 
 ## Verificación de esta versión
 
 - Inspección visual en escritorio (1280 px) y móvil (390 px), sin desbordamiento horizontal.
-- Menú, enlaces entre capítulos, apertura de los cuatro embeds y cierre del diálogo con Escape.
+- Menú, enlaces entre capítulos, apertura del reproductor y cierre del diálogo con Escape.
 - Eliminación del iframe y devolución del foco tras cerrar.
-- Las publicaciones cargaron; algunos reels muestran «Ver en Instagram», por lo que no se certifica reproducción interna universal.
 - Comprobación de sintaxis, recursos locales y enlaces internos. Sin puntuaciones de Lighthouse inventadas.
 
 ## Publicación

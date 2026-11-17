@@ -164,13 +164,11 @@
   document.querySelectorAll('[data-video]').forEach(button => button.addEventListener('click',() => {
     videoTrigger=button;
     document.querySelector('#video-title').textContent=button.dataset.title;
-    document.querySelector('#carousel-hint').hidden=button.dataset.video!=='CghCyRGodi5';
-    const url=`https://www.instagram.com/p/${button.dataset.video}/`;
-    document.querySelector('#video-original').href=url + (button.dataset.video==='CghCyRGodi5'?'?img_index=3':'');
     const iframe=document.createElement('iframe');
-    iframe.title=`Vídeo de Instagram: ${button.dataset.title}`;
-    iframe.src=url+'embed/';
-    iframe.allow='encrypted-media; fullscreen; picture-in-picture';
+    iframe.title=button.dataset.title;
+    iframe.src='https://www.youtube-nocookie.com/embed/'+button.dataset.video+'?autoplay=1&playsinline=1&rel=0';
+    iframe.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';
+    iframe.allowFullscreen=true;
     iframe.referrerPolicy='strict-origin-when-cross-origin';
     mount.replaceChildren(iframe);
     dialog.showModal();
