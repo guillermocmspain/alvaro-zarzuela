@@ -25,6 +25,7 @@
   let menuOpen = false;
   const setMenu = (open) => {
     menuOpen = open;
+    if(open) navigation.classList.remove('instant-close');
     menuButton.setAttribute('aria-expanded',String(open));
     menuButton.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');
     navigation.classList.toggle('open',open);
@@ -36,9 +37,14 @@
     else menuButton.focus({preventScroll:true});
   };
   menuButton.addEventListener('click',() => setMenu(!menuOpen));
-  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click',() => {
-    setMenu(false);
+  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click',event => {
+    event.preventDefault();
     const target = document.querySelector(link.hash);
+    navigation.classList.add('instant-close');
+    setMenu(false);
+    target.scrollIntoView({behavior:'instant',block:'start'});
+    if(location.hash!==link.hash) history.pushState(null,'',link.hash);
+    updateScroll();
     target.setAttribute('tabindex','-1');
     target.focus({preventScroll:true});
   }));
