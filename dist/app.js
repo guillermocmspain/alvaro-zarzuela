@@ -26,6 +26,7 @@
   const setMenu = (open) => {
     menuOpen = open;
     menuButton.setAttribute('aria-expanded',String(open));
+    menuButton.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');
     navigation.classList.toggle('open',open);
     navigation.inert = !open;
     main.inert = open;
